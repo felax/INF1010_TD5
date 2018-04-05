@@ -18,3 +18,10 @@ Les méthodes retrouvées de la classe Gestionnaire sont :
 - void reinitialiser();
 - void afficherProfils() const;
 */
+class GestionnaireUsager : public GestionnaireGenerique <AjouterUsager, SupprimerUsager, set<Usager*>, Usager> {
+public:
+	double obtenirChiffreAffaires() const;
+	void encherir(Client *client, ProduitAuxEncheres *produit, double montant) const;
+	void reinitialiser();
+	void afficher() const;
+};

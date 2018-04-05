@@ -5,7 +5,7 @@ Usager::Usager(const string &nom, const string &prenom, int identifiant,
                const string &codePostal)
     : nom_(nom),
       prenom_(prenom),
-      identifiant_(identifiant),
+      reference_(identifiant),
       codePostal_(codePostal)
 {
 }
@@ -37,7 +37,7 @@ double Usager::obtenirTotalAPayer() const
 
 void Usager::afficher() const
 {
-    cout << "\t" << nom_ << ", " << prenom_ << " (" << identifiant_ << ")" << endl
+    cout << "\t" << nom_ << ", " << prenom_ << " (" << reference_ << ")" << endl
         << "\t\tcode postal:\t" << codePostal_ << endl;
 }
 
@@ -51,7 +51,7 @@ void Usager::modifierPrenom(const string &prenom)
     prenom_ = prenom;
 }
 
-void Usager::modifierReference(int identifiant)
+void Usager::modifierReference(int reference)
 {
 	reference_ = reference;
 }

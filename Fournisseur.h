@@ -28,7 +28,7 @@ class Fournisseur : public Usager
 	void DiminuerPrix(int pourcent) const;
 
   private:
-    vector<Produit *> catalogue_;
+	GestionnaireProduits* catalogue_;
 };
 
 #endif

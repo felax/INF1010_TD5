@@ -70,3 +70,13 @@ void Fournisseur::enleverProduit(Produit *produit)
         }
     }
 }
+
+Produit* Fournisseur::trouverProduitPlusCher() const 
+{
+
+}
+
+void Fournisseur::DiminuerPrix(int pourcent) const 
+{
+
+}

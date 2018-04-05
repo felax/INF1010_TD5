@@ -96,3 +96,8 @@ void Client::reinitialiser()
     }
     panier_.clear();
 }
+
+Produit* Client::trouverProduitPlusCher() const
+{
+
+}
