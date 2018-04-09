@@ -5,6 +5,7 @@
 #include <vector>
 #include "Usager.h"
 #include "Produit.h"
+#include "GestionnaireProduits.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ class Client : public Usager
     unsigned int obtenirCodeClient() const;
 	void modifierCodeClient(unsigned int codeClient);
 	// TODO : Modifier ses méthodes : -------------------
-    vector<Produit *> obtenirPanier() const;
+    GestionnaireProduits* obtenirPanier() const;
     virtual double obtenirTotalAPayer() const;
     void afficherPanier() const;
     virtual void afficher() const;

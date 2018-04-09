@@ -15,7 +15,7 @@
 - obtenirConteneur()
 - pourChaqueElement()
 */
-template< typename A, typename C, typename S, typename T >
+template< typename A, typename S, typename C, typename T >
 class GestionnaireGenerique {
 public:
 	C obtenirConteneur() const { return conteneur_; };
@@ -30,7 +30,7 @@ public:
 
 	template<typename Predicate>
 	void pourChaqueElement(Predicate predicate) {
-		for_each(conteneur_.begin(), conteneur.end(), predicate);
+		for_each(conteneur_.begin(), conteneur_.end(), predicate);
 	};
 protected:
 	C conteneur_;

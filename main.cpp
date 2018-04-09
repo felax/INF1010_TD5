@@ -259,6 +259,7 @@ int main()
     tests.push_back(poly.obtenirConteneur().size() == 8);
 
 	// TEST 49 : trouver le produit le plus chère doit fonctionner selon les test suivants
+
 	tests.push_back(gaspard.trouverProduitPlusCher()->obtenirReference() == 6 &&
 					samuel.trouverProduitPlusCher()->obtenirReference() == 6 &&
 					ratus.trouverProduitPlusCher() == nullptr);
@@ -303,5 +304,6 @@ int main()
         else
             cout << "ECHEC" << endl;
     }
+	system("pause");
     return 0;
 }

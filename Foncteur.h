@@ -4,21 +4,24 @@
 * Auteur: Ryan Hardie
 *******************************************/
 
+#ifndef  FONCTEUR_H
+#define FONCTEUR_H
+
+
+
 #pragma once
-#include<map>
-#include<algorithm>
-#include<set>
+#include <map>
+#include <algorithm>
+#include <set>
+#include "Usager.h"
 
 // TODO : Créer le FoncteurEgal
 template< typename T >
 class FoncteurEgal {
 public:
 	FoncteurEgal(T* t) : t_(t) {};
-	bool operator() (pair<int, T*> pair) const {
-		if (*pair.second == *t_)
-			return true;
-		else
-			return false;
+	bool operator() (typename pair<int,T*> pair) const {
+		return (pair.second == t_);
 	};
 private:
 	T* t_;
@@ -35,9 +38,7 @@ Méthodes :
 class FoncteurGenerateurId {
 public:
 	FoncteurGenerateurId() : id_(0) {};
-	void operator() () {
-		id_++;
-	};
+	int operator() () {return(id_++);};
 private:
 	int id_;
 };
@@ -51,15 +52,24 @@ Méthodes :
 */
 class FoncteurDiminuerPourcent {
 public:
-	FoncteurDiminuerPourcent(int pourcentage) : pourcentage_(pourcentage) {};
+	FoncteurDiminuerPourcent(double pourcentage) : pourcentage_(pourcentage) {};
 	void operator() (pair<int, Produit*> pair) const {
-		double tempPrix = pair.second->obtenirPrix;
-		tempPrix *= 1 - (pourcentage_ / 100);
+		double tempPrix = pair.second->Produit::obtenirPrix();
+		double rabais = 1 - (pourcentage_ / 100.0);
+		tempPrix *= rabais;
 		pair.second->modifierPrix(tempPrix);
 	};
 private:
 	int pourcentage_;
 };
+
+/*public:
+	FoncteurDiminuerPourcent(int pourcentage) :pourcentage_(pourcentage) {};
+	pair<int, Produit*> operator()(const pair<int, Produit*>& param) {
+		double nouveauPrix = round(((100 - pourcentage_) / 100)* param.second->Produit::obtenirPrix());
+		param.second->modifierPrix(nouveauPrix);
+		return param;
+	}*/
 
 // TODO : Créer le FoncteurIntervalle
 /*
@@ -73,7 +83,7 @@ class FoncteurIntervalle {
 public:
 	FoncteurIntervalle(double inf, double sup) : borneInf_(inf), borneSup_(sup) {};
 	bool operator() (pair<int, Produit*> pair) const {
-		if (pair.second->obtenirPrix <= borneSup_ && pair.second->obtenirPrix >= borneInf_)
+		if (pair.second->obtenirPrix() <= borneSup_ && pair.second->obtenirPrix() >= borneInf_)
 			return true;
 		else
 			return false;
@@ -94,7 +104,7 @@ class AjouterProduit {
 public:
 	AjouterProduit(multimap<int, Produit*>& multimap) : multimap_(multimap) {};
 	multimap<int, Produit*>& operator() (Produit* produit) {
-		multimap_.insert(pair<int, Produit*>(produit->obtenirReference, produit));
+		multimap_.insert(pair<int, Produit*>(produit->obtenirReference(), produit));
 		return multimap_;
 	};
 private:
@@ -153,3 +163,5 @@ public:
 private:
 	set<Usager*>& set_;
 };
+
+#endif // ! FONCTEUR.H

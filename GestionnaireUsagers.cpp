@@ -5,20 +5,42 @@
 *******************************************/
 
 #include "GestionnaireUsagers.h"
+#include "Client.h"
+#include "ProduitAuxEncheres.h"
+#include "ClientPremium.h"
 
-double GestionnaireUsager::obtenirChiffreAffaires() const
+double GestionnaireUsagers::obtenirChiffreAffaires() const
 {
-
+	double chiffreAffaire = 0.0;
+	for (auto it : conteneur_) {
+		chiffreAffaire += it->obtenirTotalAPayer();
+	}
+	return chiffreAffaire;
 }
-void GestionnaireUsager::encherir(Client *client, ProduitAuxEncheres *produit, double montant) const
-{
 
+void GestionnaireUsagers::encherir(Client *client, ProduitAuxEncheres *produit, double montant) const
+{
+	for (auto it : conteneur_) {
+		if (it != client && montant > produit->obtenirPrix()) {
+			produit->mettreAJourEnchere(client, montant);
+		}
+	}
 }
-void GestionnaireUsager::reinitialiser()
+void GestionnaireUsagers::reinitialiser()
 {
-
+	for (auto it : conteneur_) {
+		it->reinitialiser();
+	}
 }
-void GestionnaireUsager::afficher() const
+void GestionnaireUsagers::afficherProfils() const
 {
-
+	cout << "PROFILS" << endl;
+	for (auto it : conteneur_) {
+		if (dynamic_cast<ClientPremium*>(it) == nullptr) {
+			it->afficher();
+		}
+		else {
+			dynamic_cast<ClientPremium*>(it)->afficherProfil();
+		}
+	}
 }
